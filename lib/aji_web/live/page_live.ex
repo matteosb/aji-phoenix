@@ -11,11 +11,13 @@ defmodule AjiWeb.PageLive do
 
   def stone_class(game_state, player_color, i, j) do
     point = {i, j}
+    cls = "stone"
 
-    cond do
-      Map.has_key?(game_state, point) -> "stone-#{Map.get(game_state, point)} stone-placed"
-      MapSet.member?(@star_points, point) -> "stone-#{player_color} star-point"
-      true -> "stone-#{player_color}"
+    if Map.has_key?(game_state, point) do
+      stone_color = Map.get(game_state, point)
+      cls <> " stone-#{stone_color} stone-placed"
+    else
+      cls <> " stone-#{player_color} stone-hover"
     end
   end
 

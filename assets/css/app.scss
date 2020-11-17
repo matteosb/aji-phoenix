@@ -112,7 +112,8 @@ body {
 .board-layer {
   /* Image from: https://commons.wikimedia.org/wiki/File:Wood_background.jpg */
   /* By Aviyal - i made it in phtoshopPreviously published: on my website, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=19464935 */
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Wood_background.jpg");
+  background: goldenrod;
+  // background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Wood_background.jpg");
   box-shadow: 10px 10px 10px #888888;
   padding: 50px;
   display: grid;
@@ -137,36 +138,34 @@ body {
   display: inline-block;
   line-height: 30px;
   height: 30px;
-  padding: 0;
   width: 30px;   
+  margin: -1px;
   text-align: center;
+  
+}
+
+.stone {
+  box-shadow: 1px 1px 1px #888888;
+  height: 28px;
+  width: 28px;
+  margin: 1px;
+  border-radius: 50%;
+  display: inline-block;
 }
 
 .stone-black {
-  height: 30px;
-  width: 30px;
-  background-color: black;
-  padding: 0;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0;
-} 
-
-.stone-black:hover {
-  opacity: 0.5;
+  background: radial-gradient(circle, dimgray, black);
 } 
 
 .stone-white {
-  height: 30px;
-  width: 30px;
-  background-color: white;
-  padding: 0;
-  border-radius: 50%;
-  display: inline-block;
-  opacity: 0;
+  background: radial-gradient(circle , white, gainsboro);
 } 
 
-.stone-white:hover {
+.stone-hover {
+  opacity: 0;
+}
+
+.stone-hover:hover {
   opacity: 0.5;
 } 
 
