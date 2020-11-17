@@ -113,9 +113,9 @@ body {
   /* Image from: https://commons.wikimedia.org/wiki/File:Wood_background.jpg */
   /* By Aviyal - i made it in phtoshopPreviously published: on my website, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=19464935 */
   background: goldenrod;
-  // background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Wood_background.jpg");
-  box-shadow: 10px 10px 10px #888888;
-  padding: 50px;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Wood_background.jpg");
+  box-shadow: 6px 6px 6px gray;
+  padding: 45px;
   display: grid;
   grid-template-columns: repeat(18, 30px);
   grid-template-rows: repeat(18, 30px);
@@ -123,6 +123,26 @@ body {
   align-items: center;
   z-index: -1;
   position: relative;
+}
+
+.cell {
+  border: 1px solid black;
+  display: inline-block;
+  line-height: 30px;
+  height: 30px;
+  width: 30px;
+  position: relative;
+  margin: -1px;
+}
+
+.cell-star-point {
+  height: 5px;
+  width: 5px;
+  position: absolute;
+  right: -3px;
+  top: -3px;
+  border-radius: 50%;
+  background: black;
 }
 
 .stone-layer {
@@ -133,36 +153,26 @@ body {
   position: absolute;
 }
 
-.cell {
-  border: 1px solid black;
-  display: inline-block;
-  line-height: 30px;
-  height: 30px;
-  width: 30px;   
-  margin: -1px;
-  text-align: center;
-  
-}
-
 .stone {
-  box-shadow: 1px 1px 1px #888888;
+  box-shadow: 1px 1px 1px dimgray;
   height: 28px;
   width: 28px;
   margin: 1px;
-  border-radius: 50%;
   display: inline-block;
+  border-radius: 50%;
 }
 
 .stone-black {
-  background: radial-gradient(circle, dimgray, black);
+background: radial-gradient(circle at 40% 40%, dimgray 1%, black 40%, black 100%); 
 } 
 
 .stone-white {
-  background: radial-gradient(circle , white, gainsboro);
+  background: radial-gradient(circle at 40% 40%, whitesmoke 1%, lightgray 90%, black 100%);
 } 
 
 .stone-hover {
   opacity: 0;
+  transition: 0.1s;
 }
 
 .stone-hover:hover {

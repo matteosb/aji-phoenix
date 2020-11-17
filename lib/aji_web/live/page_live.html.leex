@@ -1,23 +1,23 @@
 <section class="board-container">
   <div class="board-layer">
-    <%= for i <- 1..(@board_size - 1) do %>
-      <%= for j <- 1..(@board_size - 1)  do %>
-        <div class="cell"></div>
-      <% end %>
+    <%= for i <- 1..18, j <- 1..18 do %>
+      <div class="cell" id="c-<%= i %>-<%= j %>">
+        <%= if is_star_point(i, j) do %>
+          <div class="cell-star-point"></div>
+        <% end %>
+      </div>
     <% end %>
-    </div>
+  </div>
 
   <div class="stone-layer">
-    <%= for i <- 1..@board_size do %>
-      <%= for j <- 1..@board_size do %>
-        <div
-          class="<%= stone_class(@game_state, @player_color, i, j) %>"
-          phx-click="place-stone"
-          phx-value-i=<%= i %>
-          phx-value-j=<%= j %>
-        ></div>
-      <% end %>
+    <%= for i <- 1..19, j <- 1..19 do %>
+      <div
+        id="s-<%= i %>-<%= j %>"
+        class="<%= stone_class(@game_state, @player_color, i, j) %>"
+        phx-click="place-stone"
+        phx-value-i=<%= i %>
+        phx-value-j=<%= j %>
+      ></div>
     <% end %>
-    </div>
+  </div>
 </section>
-
