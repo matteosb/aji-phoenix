@@ -1,0 +1,23 @@
+<section class="board-container">
+  <div class="board-layer">
+    <%= for i <- 1..(@board_size - 1) do %>
+      <%= for j <- 1..(@board_size - 1)  do %>
+        <div class="cell"></div>
+      <% end %>
+    <% end %>
+    </div>
+
+  <div class="stone-layer">
+    <%= for i <- 1..@board_size do %>
+      <%= for j <- 1..@board_size do %>
+        <div
+          class="<%= stone_class(@game_state, @player_color, i, j) %>"
+          phx-click="place-stone"
+          phx-value-i=<%= i %>
+          phx-value-j=<%= j %>
+        ></div>
+      <% end %>
+    <% end %>
+    </div>
+</section>
+
