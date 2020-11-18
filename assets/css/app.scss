@@ -102,27 +102,31 @@ body {
 }
 
 
-.board-container {
+.board-grid-container {
   display: flex;
+  margin: auto;
+  background: goldenrod;
+  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Wood_background.jpg");
   justify-content: center;
   align-items: center;
   text-align: center;
+  height: 600px;
+  width: 600px;
+  box-shadow: 6px 6px 6px gray;
+  z-index: -2;
 }
 
 .board-layer {
   /* Image from: https://commons.wikimedia.org/wiki/File:Wood_background.jpg */
   /* By Aviyal - i made it in phtoshopPreviously published: on my website, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=19464935 */
-  background: goldenrod;
-  background-image: url("https://upload.wikimedia.org/wikipedia/commons/2/2e/Wood_background.jpg");
-  box-shadow: 6px 6px 6px gray;
-  padding: 45px;
   display: grid;
   grid-template-columns: repeat(18, 30px);
   grid-template-rows: repeat(18, 30px);
   justify-items: center;
   align-items: center;
-  z-index: -1;
+  z-index: 0;
   position: relative;
+  border: 1px solid black;
 }
 
 .cell {
@@ -163,7 +167,7 @@ body {
 }
 
 .stone-black {
-background: radial-gradient(circle at 40% 40%, dimgray 1%, black 40%, black 100%); 
+  background: radial-gradient(circle at 40% 40%, dimgray 1%, black 40%, black 100%); 
 } 
 
 .stone-white {
