@@ -6,7 +6,13 @@ defmodule AjiWeb.PageLive do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, board_size: 19, player_color: :white, game_state: %{})}
+    Phoenix.PubSub.subscribe(Aji.PubSub, "game:global")
+    {:ok, load_game_state(socket)}
+  end
+
+  @impl true
+  def handle_info(:reload, socket) do
+    {:noreply, load_game_state(socket)}
   end
 
   @impl true
@@ -17,16 +23,15 @@ defmodule AjiWeb.PageLive do
     socket =
       socket
       |> place_stone({i, j})
-      |> switch_player()
 
     {:noreply, socket}
   end
 
-  defp stone_class(game_state, player_color, i, j) do
+  defp stone_class(board_state, player_color, i, j) do
     point = {i, j}
 
-    if Map.has_key?(game_state, point) do
-      stone_color = Map.get(game_state, point)
+    if Map.has_key?(board_state, point) do
+      stone_color = Map.get(board_state, point)
       "stone stone-#{stone_color} stone-placed"
     else
       "stone stone-#{player_color} stone-hover"
@@ -34,21 +39,30 @@ defmodule AjiWeb.PageLive do
   end
 
   defp place_stone(socket, point) do
-    %{game_state: game_state, player_color: player_color} = socket.assigns
-    assign(socket, game_state: Map.put(game_state, point, player_color))
-  end
+    {:ok, %{to_move: player_color, moves: moves}} =
+      GenServer.call(Aji.GameServer, {:place_stone, point})
 
-  defp switch_player(socket) do
-    new_color =
-      case socket.assigns.player_color do
-        :black -> :white
-        :white -> :black
-      end
-
-    assign(socket, player_color: new_color)
+    assign(socket, board_state: moves_to_board_state(moves), player_color: player_color)
   end
 
   def is_star_point(i, j) do
-    MapSet.member?(@star_points, {i, j + 1})
+    MapSet.member?(@star_points, {i, j})
+  end
+
+  defp load_game_state(socket) do
+    game_state = GenServer.call(Aji.GameServer, {:get_game_state})
+
+    assign(socket,
+      board_size: 19,
+      player_color: game_state.to_move,
+      board_state: moves_to_board_state(game_state.moves)
+    )
+  end
+
+  defp moves_to_board_state(moves) do
+    # FIXME: handle passes
+    Enum.reduce(moves, %{}, fn {:move, coord, color}, state ->
+      Map.put(state, coord, color)
+    end)
   end
 end
