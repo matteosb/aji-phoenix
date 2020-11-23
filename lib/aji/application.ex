@@ -12,9 +12,10 @@ defmodule Aji.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Aji.PubSub},
       # Start the Endpoint (http/https)
-      AjiWeb.Endpoint
+      AjiWeb.Endpoint,
       # Start a worker by calling: Aji.Worker.start_link(arg)
       # {Aji.Worker, arg}
+      {Aji.GameServer, name: Aji.GameServer}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
